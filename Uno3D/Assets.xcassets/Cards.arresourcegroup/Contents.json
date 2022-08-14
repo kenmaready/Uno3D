@@ -1,0 +1,23 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "resources" : [
+    {
+      "filename" : "uno.arreferenceimage"
+    },
+    {
+      "filename" : "yellow_1.arreferenceimage"
+    },
+    {
+      "filename" : "yellow_2.arreferenceimage"
+    },
+    {
+      "filename" : "yellow_3.arreferenceimage"
+    },
+    {
+      "filename" : "yellow_4.arreferenceimage"
+    }
+  ]
+}
