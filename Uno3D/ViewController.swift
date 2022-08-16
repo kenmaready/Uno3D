@@ -21,7 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
+        sceneView.autoenablesDefaultLighting = true
 
     }
     
@@ -34,7 +34,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let images = ARReferenceImage.referenceImages(inGroupNamed: "Cards", bundle: Bundle.main) {
             configuration.trackingImages = images
             configuration.maximumNumberOfTrackedImages = 5
-            print("Images successfully added.")
         }
         
         // Run the view's session
@@ -62,8 +61,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let planeNode = SCNNode(geometry: plane)
             planeNode.eulerAngles.x = -Float.pi / 2
             node.addChildNode(planeNode)
+            
+            var imageFileName: String
+            var imageScale: SCNVector3
+            var imageXRotation: Float
+            var imageZRotation: Float
+
+            switch anchor.name! {
+            case "yellow_3":
+                imageFileName = "Dragon 2.5"
+                imageScale = SCNVector3(0.15, 0.15, 0.15)
+                imageXRotation = Float.pi / 2
+                imageZRotation = 0.0
+            case "yellow_2":
+                imageFileName = "Spyro_The_Dragon"
+                imageScale = SCNVector3(0.0003, 0.0003, 0.0003)
+                imageXRotation = Float.pi
+                imageZRotation = Float.pij
+            default:
+                return node
+            }
+            
+            let dragonScene = SCNScene(named: "art.scnassets/\(imageFileName).scn")!
+            let dragonNode = dragonScene.rootNode.childNodes.first!
+            dragonNode.scale = imageScale
+            dragonNode.eulerAngles.x = imageXRotation
+            dragonNode.eulerAngles.z = imageZRotation
+            planeNode.addChildNode(dragonNode)
         }
-        
+    
         return node
     }
 }
